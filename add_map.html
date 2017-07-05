@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        height: 500px;
+        width: 50%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3 style= "color:red; border:1px solid red;"><center>This website is under construction</center></h3>
+    <h1><center>Welcome to Wi-Find.</center></h1>
+    <h4><center>Where the Wi-Fi comes to you.</center></h4> 
+    <div id="map"></div>
+    <script> <!--JAVASCRIPT -->
+
+      function initMap() {
+
+        var uluru = {lat: 45.507731, lng: -73.776876};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=[APIKEY]&callback=initMap"> <!-- use of API KEY -->
+    </script>
+  </body>
+</html>

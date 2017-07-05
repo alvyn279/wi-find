@@ -1,0 +1,1 @@
+SELECT * FROM wifi_database.WiFiSpots;
