@@ -8,4 +8,4 @@ This project not only involves the creation of a website to hold the map and sta
 h
 July 4th 2017
 
-Note from the creator: My name is Alvyn Duy-Khoi Le and I am currently a first-year student at Concordia University in Software Engineering. My love for computer and programming has brought me to start a project of my own, that was once an idea that became an excellent learning opportunity.
+Note from the creator: My name is Alvyn Duy-Khoi Le and I am currently a first-year student at Concordia University in Software Engineering. My love for computers and programming has brought me to start a project of my own, that was once an idea that became an excellent learning opportunity.
