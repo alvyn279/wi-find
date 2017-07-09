@@ -1,6 +1,6 @@
 <?php
 global $servername="localhost";
 global $username= "root";
-global $password= "Janus097";
-global $database= "root-wifi_database";
+global $password= //password goes here;
+global $database= //database name goes here;
 ?>	
