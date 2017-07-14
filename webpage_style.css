@@ -1,8 +1,12 @@
 #map {
         height: 500px;
-        width: 50%;
+        width:800px;
+        margin:auto; 
        }
+body {
 
+	background-color: beige;	
+}
 h1{
     text-align: center;
 }
