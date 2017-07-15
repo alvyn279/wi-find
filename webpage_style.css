@@ -5,16 +5,28 @@
        }
 body {
 
-	background-color: beige;	
+	background-color: lemonchiffon;	
 }
-h1{
-    text-align: center;
+
+#topbanner{
+
+  padding: 5px;
+  width:98%;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 10px;
+  background-color: khaki;
 }
-h4 {
-   text-align: center;
-}
+
 h3 {
    color: red;
    border: 1px solid red;
    text-align: center;
  }
+ #foot{ 
+  clear: both;
+  margin-bottom: 0px;
+  width:100%;
+  background-color: khaki;
+  text-align: center;
+}
