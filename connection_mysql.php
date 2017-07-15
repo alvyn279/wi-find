@@ -66,7 +66,7 @@ echo '<WiFiSpots>';
 	//while($row = $result->fetch(PDO::FECTH_ASSOC)){
 
 	 echo '<marker ';	
-	  echo 'idWiFiSpots="' . $ind . '" ';
+	  echo 'idWiFiSpots="' . $row['idWiFiSpots'] . '" ';
 	  echo 'WiFiName="' . parseToXML($row['WiFiName']) . '" ';
 	  echo 'Strength="' . $row['Strength'] . '" ';
 	  echo 'Paid="' . parsetoXML($row['Paid']) . '" ';
