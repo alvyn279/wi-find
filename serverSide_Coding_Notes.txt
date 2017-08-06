@@ -1,0 +1,24 @@
+Website is live at wifind.alvynle.me (06/08/2017)
+(subdomain to alvynle.me, which will be the url to my personal website)
+
+Web Hosting Service:  awardspace
+
+Database:
+
+Due to awardspace's limitations regarding remote handling of databases through softwares such as MySQL Workbench, I needed to
+export the database onto their database service.
+
+Database credentials change:
+host is now "fdb16.awardspace.net"
+user, database name, and obviously password change as well.
+
+Main problem:
+PHP script (connection_mysql) will not execute properly if not leaving the database credentials embeded into it (internally).
+
+Observations:
+Markers appear ~ 5 seconds after page with map is loaded. Probably due to the JS accessing the PHP accessing the Database on
+server.
+
+
+
+
