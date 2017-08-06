@@ -4,20 +4,12 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" type="image/x-icon" href="wifind.ico" />
-    <title>Wi-Find</title>
+    <title>Wi-Find - Home</title>
     <link rel="stylesheet" type="text/css" href="webpage_style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-    <style>
-    #map {
-        height: 500px;
-        width:800px;
-        margin:auto; 
-       }
 
-    </style>
   </head>
   
   <body>
@@ -28,9 +20,9 @@
             <a class="navbar-brand" href="#">Wi-Find</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#"><span class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Locations</a></li>
+            <li class="active"><a href="master_webpage.html"><span class="glyphicon glyphicon-home">&nbsp;Home</span></a></li>
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="find_wifi.html">Find a Wi-Fi Location</a></li>
             <li><a href="#">Request Entry&nbsp;&nbsp;<span class="label label-info">Coming Soon!</span></a></li>
           </ul>
         </div>
@@ -78,14 +70,7 @@
         </div>   
       </div>
     <div><p><br /><br /></p></div>
-    <div id="map"></div> <!--section of the webpage dedicated to the map -->
-    <script src="show_map.js">
-      //use JS to show the map itself with the function initMap()
-    </script>
-    <!--calling the map with the API key. please do not use my api key lol-->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCcyVm5ktktLhVU9n1EV18sntbOUUgalg&callback=initMap">
-     </script>
-
+   
     <footer class="container-fluid text-center">
     <p><a href=""><br /><br />Legal</a>&nbsp;<a href="">Contact Us</a></p>
     <p>Copyrights &copy; All rights reserved to author. Restricted Usage</p>
