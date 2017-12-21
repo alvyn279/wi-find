@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" type="image/x-icon" href="wifind.ico" />
+    <title>Send in your request</title>
+    <link rel="stylesheet" type="text/css" href="webpage_style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="registerValidation.js"></script>
+  </head>
+  
+  <body>
+      
+     <nav class="navbar navbar-inverse">
+       <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">Wi-Find&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home">&nbsp;</span></a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="about-us.html">About Us</a></li>
+            <li><a href="find_wifi.html">Find a Wi-Fi Location</a></li>
+            <li class="active"><a href="#">Request Entry</a></li>
+          </ul>
+        </div>
+    </nav> 
+    <div class="container-fluid">
+
+        <div class="jumbotron text-center">
+             <h2>Register a new Wi-Fi spot onto our bank!</h2>
+        </div>
+
+        <div id="message">
+        <div class="well" > <b>We are currently populating the Wi-Fi location bank. Data is mainly taken from Ile Sans-Fil public database, public commerces and the input from your requests.</b> </div>
+        </div>
+
+      </div>
+      <div class="container-fluid">
+      <div class="row">      
+          <div class="col-sm-12">
+          </div>
+        </div>
+      </div>
+  
+  <div class="container">
+    <h3>About you</h3>
+      <form class="form-horizontal" method="post" action="" id="registerForm">
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="username">Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" placeholder="Enter your full name" name="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="email">Email:</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+          </div>
+        </div>
+
+    <h3><br />Add a new entry</h3>
+        
+        <div class="form-group">
+          <br />
+          <label class="control-label col-sm-2" for="wifiname">Spot name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="wifiname" placeholder="Enter the Wi-Fi spot name" name="wifiname">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="address">Spot Address:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="address" placeholder="Enter the full address as seen in Google Maps" name="address">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="latitude">Latitude:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="latitude" placeholder="Copy paste the latitude coordinate from Google Maps" name="latitude">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="longitude">Longitude:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="longitude" placeholder="Copy paste the longitude coordinate from Google Maps" name="longitude">
+          </div>
+        </div>
+
+
+    <h3><br />Information about the entry</h3>
+
+        <div class="form-group">
+          <label class="control-label col-sm-4" for="strength">What strength on /5 would you give it?</label>
+          <div class="col-sm-8">
+            
+
+          </div>
+        </div>
+
+
+        <div class="form-group">        
+          <div style="text-align: center;">
+            <button type="submit" class="btn btn-default" onclick="return check()">Submit</button>
+          </div>
+        </div>
+    
+      </form>
+  </div>
+ 
+
+    <footer class="container-fluid text-center">
+    <p><a href=""><br /><br />Legal</a>&nbsp;&nbsp;<a href="">Contact Us</a></p>
+    <p>Copyrights &copy; All rights reserved to author. Restricted Usage</p>
+    </footer>
+
+  </body>
+</html>
