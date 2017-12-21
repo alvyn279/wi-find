@@ -1,3 +1,5 @@
+
+
 function check(){
 
 	var name =  document.getElementById("username").value;
@@ -12,12 +14,12 @@ function check(){
 	document.getElementById("latitude").style.backgroundColor="#FFFFFF";
 	var longitude = document.getElementById("longitude").value;
 	document.getElementById("longitude").style.backgroundColor="#FFFFFF";
-
+        
 	var alerts="";
-
+        
 	if (name == ""){
 		alerts += "Please enter your full name.\n";
-
+        
 		document.getElementById("username").style.backgroundColor="#f2dede";
 		
 		if  (document.getElementById("alertWell") == null){
@@ -69,22 +71,28 @@ function check(){
 			setAlertWell();
 		}
 	}
-	alert(alerts);
-	return false;
+	
+        if (alerts==""){
+           document.getElementById("registerForm").setAttribute('action', "emailLanding.php");
+        }
+        else {
+            alert(alerts);
+            return false;
+        }
 
 }
 
 
 function setAlertWell(){
 
-	var alertdiv = document.createElement("div");
-	alertdiv.setAttribute("id", "alertWell");
-	alertdiv.setAttribute("class", "alert alert-danger");
+    var alertdiv = document.createElement("div");
+    alertdiv.setAttribute("id", "alertWell");
+    alertdiv.setAttribute("class", "alert alert-danger");
+        
+    var textnode = document.createTextNode("Please fill all the blanks in order to complete the registration of the new wi-fi spot.");
+    alertdiv.appendChild(textnode);
 
-	var textnode = document.createTextNode("Please fill all the blanks in order to complete the registration of the new wi-fi spot.");
-	alertdiv.appendChild(textnode);
-
-	document.getElementById("message").appendChild(alertdiv);
-	
-	return false;
+    document.getElementById("message").appendChild(alertdiv);
+        
+    return false;
 }

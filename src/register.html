@@ -4,7 +4,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <link rel="shortcut icon" type="image/x-icon" href="wifind.ico" />
-    <title>Search a nearby Wi-Fi spot</title>
+    <title>Send in your request</title>
     <link rel="stylesheet" type="text/css" href="webpage_style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -17,7 +17,7 @@
      <nav class="navbar navbar-inverse">
        <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="master_webpage.html">Wi-Find&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home">&nbsp;</span></a>
+            <a class="navbar-brand" href="index.html">Wi-Find&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home">&nbsp;</span></a>
           </div>
           <ul class="nav navbar-nav">
             <li><a href="about-us.html">About Us</a></li>
@@ -33,7 +33,7 @@
         </div>
 
         <div id="message">
-        <div class="well" style="text-align: left; font-weight: bold;" > We are currently populating the Wi-Fi location bank. Data is mainly taken from Ile Sans-Fil public database, public commerces and the input from your requests. </div>
+        <div class="well" > <b>We are currently populating the Wi-Fi location bank. Data is mainly taken from Ile Sans-Fil public database, public commerces and the input from your requests.</b> </div>
         </div>
 
       </div>
@@ -43,10 +43,10 @@
           </div>
         </div>
       </div>
-
+  
   <div class="container">
     <h3>About you</h3>
-      <form class="form-horizontal" action="">
+      <form class="form-horizontal" method="post" action="" id="registerForm">
         
         <div class="form-group">
           <label class="control-label col-sm-2" for="username">Name:</label>
@@ -97,7 +97,7 @@
     <h3><br />Information about the entry</h3>
 
         <div class="form-group">
-          <label class="control-label col-sm-4" for="strength">What is the strength you would give it (out of 5)?</label>
+          <label class="control-label col-sm-4" for="strength">What strength on /5 would you give it?</label>
           <div class="col-sm-8">
             
 
@@ -105,19 +105,15 @@
         </div>
 
 
-
-
         <div class="form-group">        
           <div style="text-align: center;">
             <button type="submit" class="btn btn-default" onclick="return check()">Submit</button>
           </div>
         </div>
+    
       </form>
   </div>
-    
-
-
-
+ 
 
     <footer class="container-fluid text-center">
     <p><a href=""><br /><br />Legal</a>&nbsp;&nbsp;<a href="">Contact Us</a></p>
