@@ -22,7 +22,7 @@
           var infoWindow = new google.maps.InfoWindow; //create a window object
 
           // Change this depending on the name of your PHP or XML file
-          downloadUrl('connection_mysql.php', function(data) { //using the file in the same directory for the connection to database 
+          downloadUrl('server/connection-mysql.php', function(data) { //using the file in the same directory for the connection to database
           //and output of the xml document
 
             var xml = data.responseXML;

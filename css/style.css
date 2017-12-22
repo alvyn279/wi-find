@@ -4,7 +4,18 @@
         margin:auto; 
        }
 
-
+.navbar {
+    /*margin-bottom: 0 !important;*/
+}
+.me {
+    background-color: #52BE80;
+    padding-bottom: 100px;
+}
+.auto-portrait {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+}
 /*body {
 
 	background-color: lemonchiffon;	

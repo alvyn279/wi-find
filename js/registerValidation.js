@@ -14,6 +14,8 @@ function check(){
 	document.getElementById("latitude").style.backgroundColor="#FFFFFF";
 	var longitude = document.getElementById("longitude").value;
 	document.getElementById("longitude").style.backgroundColor="#FFFFFF";
+        var strength=  document.getElementById("strength").value;
+        document.getElementById("strength").style.backgroundColor="#FFFFFF";
         
 	var alerts="";
         
@@ -71,9 +73,18 @@ function check(){
 			setAlertWell();
 		}
 	}
+        if (strength== "Choose..."){
+            
+                alerts += "Please enter the strength you obtain in terms of bars when connecting to the wi-fi spot.";
+                document.getElementById("strength").style.backgroundColor="#f2dede";
+		
+		if  (document.getElementById("alertWell") == null){
+			setAlertWell();
+		}
+        }
 	
         if (alerts==""){
-           document.getElementById("registerForm").setAttribute('action', "emailLanding.php");
+           document.getElementById("registerForm").setAttribute('action', "server/emailLanding.php");
         }
         else {
             alert(alerts);
