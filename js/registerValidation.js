@@ -73,7 +73,7 @@ function check(){
 	}
 	
         if (alerts==""){
-           document.getElementById("registerForm").setAttribute('action', "emailLanding.php");
+           document.getElementById("registerForm").setAttribute('action', "server/emailLanding.php");
         }
         else {
             alert(alerts);

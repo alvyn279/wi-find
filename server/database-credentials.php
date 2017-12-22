@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "Janus097";
 $database = "wifi_database";
 

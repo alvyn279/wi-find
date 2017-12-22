@@ -10,13 +10,13 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <link rel="shortcut icon" type="image/x-icon" href="wifind.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="../wifind.ico" />
     <title>Send in your request</title>
-    <link rel="stylesheet" type="text/css" href="webpage_style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="registerValidation.js"></script>
+    <script src="../js/registerValidation.js"></script>
   </head>
   
   <body onload="updateData()">
@@ -24,11 +24,11 @@
      <nav class="navbar navbar-inverse">
        <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html">Wi-Find&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home">&nbsp;</span></a>
+            <a class="navbar-brand" href="../index.html">Wi-Find&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home">&nbsp;</span></a>
           </div>
           <ul class="nav navbar-nav">
-            <li><a href="about-us.html">About Us</a></li>
-            <li><a href="find_wifi.html">Find a Wi-Fi Location</a></li>
+            <li><a href="../about-us.html">About Us</a></li>
+            <li><a href="../find-wifi.html">Find a Wi-Fi Location</a></li>
             <li class="active"><a href="#">Request Entry</a></li>
           </ul>
         </div>
