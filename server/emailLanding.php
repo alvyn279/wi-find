@@ -1,7 +1,36 @@
 <?php
+    //This php code will take care of sending a confirmation email. Will do this for th hosting service as well.
+    
+    $username = $_POST["username"];
+    $email= $_POST["email"];
+    $wifiname = $_POST["wifiname"];
+    $address = $_POST["address"];
+    $latitude = $_POST["latitude"];
+    $longitude= $_POST["longitude"];
+    $strength = $_POST["strength"];
     
     
-
+    
+    $subject= "Request for new entry on Wi-Find database";
+    $message= "Hello " .  $username. ", \nWe would like to thank you for your interest in providing free public Wi-Fi to the population of Montreal.This email is a confirmation of your request to add a wi-fi spot onto wi-find.alvynle.me. Here are in full the details of your submission:  \n\n";
+    
+    $message += ("Applicant name: " . $username . "\n");
+    $message += ("Wi-Fi Spot Name: " . $wifiname . "\n");
+    $message += ("Address: " . $address . "\n");
+    
+    $message += ("Longitude: " . $longitude. "\n");
+    $message += ("Latitude: ". $latitude . "\n");
+    $message += ("Strength: ". $strength . "\n\n");
+    
+    $message +=  ("Your application for a new registration will be taken under review within the next days and a status email will be sent to " . $email . "\nSincerely,\nThe Wi-Find Team");
+    
+    
+    
+    mail($email, $subject, $message);
+    //send a copy to master 
+    mail("register@alvynle.me", $subject, $message);
+    
+    
 ?>
 
 
