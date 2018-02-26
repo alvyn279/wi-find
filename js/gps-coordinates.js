@@ -23,7 +23,7 @@ function fillInAddress() {
 // as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             var geolocation = {
                 lat: position.coords.latitude,
                 lng: position.coords.longitude
@@ -47,7 +47,6 @@ var coordinateComponents = {
 };
 
 function getCoordinates() {
-    alert(coordinateComponents.formattedAddress.value);
     var formattedAddressVal = coordinateComponents.formattedAddress.value;
     var fullRequest = coordinateComponents.request + formattedAddressVal + coordinateComponents.APIKey;
     var xhttp = new XMLHttpRequest();
