@@ -35,27 +35,16 @@ function check() {
         } else if (Util.isEmpty(fields[i].selector.value)) {
             alerts += fields[i].errorMsg + "\n";
             fields[i].selector.style.backgroundColor = colorRed;
+        } else {
+            fields[i].selector.style.backgroundColor = "#FFFFFF";
         }
     }
     if (alerts === "") {
         document.getElementById("registerForm").setAttribute('action', "server/emailLanding.php");
     } else {
         alert(alerts);
-        setAlertWell();
+        var alertWell = document.getElementById("alertWell");
+        alertWell.classList.remove("hidden");
         return false;
     }
-}
-
-function setAlertWell() {
-
-    var alertdiv = document.createElement("div");
-    alertdiv.setAttribute("id", "alertWell");
-    alertdiv.setAttribute("class", "alert alert-danger");
-
-    var textnode = document.createTextNode("Please fill all the blanks in order to complete the registration of the new wi-fi spot.");
-    alertdiv.appendChild(textnode);
-
-    document.getElementById("message").appendChild(alertdiv);
-
-    return false;
 }
