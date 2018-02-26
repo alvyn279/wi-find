@@ -75,24 +75,37 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="address">Spot Address:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="address"
+                <input type="text" class="form-control" id="address" onfocus="geolocate()"
                        placeholder="Enter the full address as seen in Google Maps" name="address">
+            </div>
+        </div>
+
+        <div class="form-group hidden">
+            <label class="control-label col-sm-2" for="formatted-address">Formatted address:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="formatted-address" name="formatted-address" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="get-lat-long"></label>
+            <div class="col-sm-4">
+                <input type="button" class="btn btn-default" id="get-lat-long" onclick="getCoordinates()"
+                       name="get-lat-long" value="Get GPS Coordinates">
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="latitude">Latitude:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="latitude"
-                       placeholder="Copy paste the latitude coordinate from Google Maps" name="latitude">
+                <input type="text" class="form-control" id="latitude" name="latitude" readonly>
             </div>
         </div>
 
         <div class="form-group">
             <label class="control-label col-sm-2" for="longitude">Longitude:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="longitude"
-                       placeholder="Copy paste the longitude coordinate from Google Maps" name="longitude">
+                <input type="text" class="form-control" id="longitude" name="longitude" readonly>
             </div>
         </div>
 
@@ -134,6 +147,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Replace the value of the key parameter with your own API key. -->
+<script src="js/gps-coordinates.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQG5yAn1cybxAKDpFrVyiWWyg3FEt3gMg&libraries=places&callback=initAutocomplete"></script>
 <script src="js/registerValidation.js"></script>
 </body>
 </html>
