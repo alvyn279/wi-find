@@ -10,7 +10,10 @@ function errorMessages() {
     };
 }
 function check() {
-    var colorRed = "#f2dede";
+    var inputBGColor = {
+        red: "#f2dede",
+        white: "#fff"
+    };
     var alerts = "";
     var fields = [
         {selector: document.getElementById("username"), errorMsg: errorMessages().name},
@@ -27,16 +30,18 @@ function check() {
         if (i === 1) { // special case for email
             if (!Util.isValidEmail(fields[i].selector.value)) {
                 alerts += fields[i].errorMsg + "\n";
-                fields[i].selector.style.backgroundColor = colorRed;
+                fields[i].selector.style.backgroundColor = inputBGColor.red;
+            } else {
+                fields[i].selector.style.backgroundColor = inputBGColor.white;
             }
         } else if (strengthSelectedIndex === 0 && i === strengthIndex) { // special case for strength
             alerts += fields[i].errorMsg + "\n";
-            fields[i].selector.style.backgroundColor = colorRed;
+            fields[i].selector.style.backgroundColor = inputBGColor.red;
         } else if (Util.isEmpty(fields[i].selector.value)) {
             alerts += fields[i].errorMsg + "\n";
-            fields[i].selector.style.backgroundColor = colorRed;
+            fields[i].selector.style.backgroundColor = inputBGColor.red;
         } else {
-            fields[i].selector.style.backgroundColor = "#FFFFFF";
+            fields[i].selector.style.backgroundColor = inputBGColor.white;
         }
     }
     if (alerts === "") {
