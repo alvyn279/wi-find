@@ -1,109 +1,50 @@
-
-
-function check(){
-
-	var name =  document.getElementById("username").value;
-	document.getElementById("username").style.backgroundColor="#FFFFFF";
-	var email =  document.getElementById("email").value;
-	document.getElementById("email").style.backgroundColor="#FFFFFF";
-	var wifiname =  document.getElementById("wifiname").value;
-	document.getElementById("wifiname").style.backgroundColor="#FFFFFF";
-	var address =  document.getElementById("address").value;
-	document.getElementById("address").style.backgroundColor="#FFFFFF";
-	var latitude =  document.getElementById("latitude").value;
-	document.getElementById("latitude").style.backgroundColor="#FFFFFF";
-	var longitude = document.getElementById("longitude").value;
-	document.getElementById("longitude").style.backgroundColor="#FFFFFF";
-        var strength=  document.getElementById("strength").value;
-        document.getElementById("strength").style.backgroundColor="#FFFFFF";
-        
-	var alerts="";
-        
-	if (name == ""){
-		alerts += "Please enter your full name.\n";
-        
-		document.getElementById("username").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-	}
-	if (email== ""){
-		alerts += "Please enter your email address.\n";
-		
-		document.getElementById("email").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-	}
-	if (wifiname == ""){
-		alerts += "Please enter the name of the desired new wi-spot.\n";
-		
-		document.getElementById("wifiname").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-	}
-	if (address == ""){
-		alerts += "Please enter the address associated with the location of the wi-fi spot.\n";
-		
-		document.getElementById("address").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-	}
-	if (latitude == ""){
-		alerts +="Please enter the latitude coordinate of the wi-fi spot.\n";
-		
-		document.getElementById("latitude").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-	}
-	if (longitude == ""){
-		alerts += "Please enter the longitude coordinate of the wi-fi spot.\n";
-		
-		document.getElementById("longitude").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-	}
-        if (strength== "Choose..."){
-            
-                alerts += "Please enter the strength you obtain in terms of bars when connecting to the wi-fi spot.";
-                document.getElementById("strength").style.backgroundColor="#f2dede";
-		
-		if  (document.getElementById("alertWell") == null){
-			setAlertWell();
-		}
-        }
-	
-        if (alerts==""){
-           document.getElementById("registerForm").setAttribute('action', "server/emailLanding.php");
-        }
-        else {
-            alert(alerts);
-            return false;
-        }
-
+function errorMessages() {
+    return {
+        name: "Please enter your full name.",
+        email: "Please enter your email address.",
+        wifiname: "Please enter the name of the desired new wi-spot.",
+        address: "Please enter the address associated with the location of the wi-fi spot.",
+        latitude: "Please enter the latitude coordinate of the wi-fi spot.",
+        longitude: "Please enter the longitude coordinate of the wi-fi spot",
+        strength: "Please enter the strength you obtain in terms of bars when connecting to the wi-fi spot."
+    };
 }
-
-
-function setAlertWell(){
-
-    var alertdiv = document.createElement("div");
-    alertdiv.setAttribute("id", "alertWell");
-    alertdiv.setAttribute("class", "alert alert-danger");
-        
-    var textnode = document.createTextNode("Please fill all the blanks in order to complete the registration of the new wi-fi spot.");
-    alertdiv.appendChild(textnode);
-
-    document.getElementById("message").appendChild(alertdiv);
-        
-    return false;
+function check() {
+    var colorRed = "#f2dede";
+    var alerts = "";
+    var fields = [
+        {selector: document.getElementById("username"), errorMsg: errorMessages().name},
+        {selector: document.getElementById("email"), errorMsg: errorMessages().email},
+        {selector: document.getElementById("wifiname"), errorMsg: errorMessages().wifiname},
+        {selector: document.getElementById("address"), errorMsg: errorMessages().address},
+        {selector: document.getElementById("latitude"), errorMsg: errorMessages().latitude},
+        {selector: document.getElementById("longitude"), errorMsg: errorMessages().longitude},
+        {selector: document.getElementById("strength"), errorMsg: errorMessages().strength}
+    ];
+    for (var i = 0; i < fields.length; i++) {
+        var strengthIndex = fields.length - 1;
+        var strengthSelectedIndex = fields[strengthIndex].selector.selectedIndex;
+        if (i === 1) { // special case for email
+            if (!Util.isValidEmail(fields[i].selector.value)) {
+                alerts += fields[i].errorMsg + "\n";
+                fields[i].selector.style.backgroundColor = colorRed;
+            }
+        } else if (strengthSelectedIndex === 0 && i === strengthIndex) { // special case for strength
+            alerts += fields[i].errorMsg + "\n";
+            fields[i].selector.style.backgroundColor = colorRed;
+        } else if (Util.isEmpty(fields[i].selector.value)) {
+            alerts += fields[i].errorMsg + "\n";
+            fields[i].selector.style.backgroundColor = colorRed;
+        } else {
+            fields[i].selector.style.backgroundColor = "#FFFFFF";
+        }
+    }
+    if (alerts === "") {
+        document.getElementById("registerForm").setAttribute('action', "server/emailLanding.php");
+    } else {
+        alert(alerts);
+        var alertWell = document.getElementById("alertWell");
+        alertWell.classList.remove("hidden");
+        return false;
+    }
 }
