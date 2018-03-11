@@ -12,11 +12,21 @@ function initAutocomplete() {
     autocomplete.addListener('place_changed', fillInAddress);
 }
 
+/**
+ * Reformat the address you get from autocomplete (removing spaces and comma).
+ * This new address is used for 'Get GPS Coordinates' request.
+ * before: "10924 Saint Laurent Boulevard, Montreal, QC, Canada"
+ * after: "10924+Saint+Laurent+Boulevard+Montreal+QC+Canada"
+ */
+function reformatAddressForRequest(address) {
+    return address.split(" ").join("+").replace(/,/gi, "");
+}
+
 function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
     var formattedAddress = place.formatted_address;
-    document.getElementById("formatted-address").value = formattedAddress.split(" ").join("+");
+    document.getElementById("formatted-address").value = reformatAddressForRequest(formattedAddress);
 }
 
 // Bias the autocomplete object to the user's geographical location,
