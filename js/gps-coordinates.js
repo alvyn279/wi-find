@@ -57,6 +57,9 @@ var coordinateComponents = {
 };
 
 function getCoordinates() {
+    if (Util.isEmpty(document.getElementById("address").value)) {
+        alert("Enter a valid address.")
+    }
     var formattedAddressVal = coordinateComponents.formattedAddress.value;
     var fullRequest = coordinateComponents.request + formattedAddressVal + coordinateComponents.APIKey;
     var xhttp = new XMLHttpRequest();

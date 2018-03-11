@@ -1,7 +1,7 @@
 function errorMessages() {
     return {
         name: "Please enter your full name.",
-        email: "Please enter your email address.",
+        email: "Please enter a valid email address.",
         wifiname: "Please enter the name of the desired new wi-spot.",
         address: "Please enter the address associated with the location of the wi-fi spot.",
         latitude: "Please enter the latitude coordinate of the wi-fi spot.",
