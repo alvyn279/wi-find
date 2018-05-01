@@ -1,3 +1,6 @@
+/vendor
+/.idea
 nbproject/
 API-key
 server/database-credentials.php
+composer.lock
