@@ -6,7 +6,7 @@
 
 ### Requirements
 - index, view, and edit pages cannot be access without signing in
-- use query string to get values for an item for view and edit:
+- use query string to get values of an item in view and edit page:
   - view.php?itemId=1
   - edit.php?itemId=1
   
