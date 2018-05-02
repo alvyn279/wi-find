@@ -24,7 +24,7 @@ class WifiSpotsDao
         $this->data = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getData()
+    protected function getData()
     {
         $this->fetchAllData();
         return $this->data;

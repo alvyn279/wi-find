@@ -1,5 +1,20 @@
 <?php
 
+use admin\app\ConfigEnum;
+use admin\app\DatabaseConfiguration;
+use admin\app\DatabaseConnection;
+
+$config = new DatabaseConfiguration(
+    ConfigEnum::DB_HOST,
+    ConfigEnum::DB_PORT,
+    ConfigEnum::DB_NAME,
+    ConfigEnum::DB_USER,
+    ConfigEnum::DB_PASSWORD
+);
+$connection = new DatabaseConnection($config);
+$wifiSpot = new HandleWifiSpots($connection);
+// $items = $wifiSpot->getAllItems();
+
 ?>
 <!doctype html>
 <html lang="en">
