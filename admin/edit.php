@@ -1,8 +1,8 @@
 <?php
 
-use admin\app\ConfigEnum;
-use admin\app\DatabaseConfiguration;
-use admin\app\DatabaseConnection;
+require 'app/ConfigEnum.php';
+require 'app/DatabaseConfiguration.php';
+require 'app/DatabaseConnection.php';
 
 $config = new DatabaseConfiguration(
     ConfigEnum::DB_HOST,

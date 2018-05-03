@@ -1,8 +1,10 @@
 <?php
 
-use admin\app\ConfigEnum;
-use admin\app\DatabaseConfiguration;
-use admin\app\DatabaseConnection;
+require 'app/ConfigEnum.php';
+require 'app/DatabaseConfiguration.php';
+require 'app/DatabaseConnection.php';
+require 'app/dao/WifiSpotsDao.php';
+require 'app/HandleWifiSpots.php';
 
 $config = new DatabaseConfiguration(
     ConfigEnum::DB_HOST,
@@ -13,7 +15,11 @@ $config = new DatabaseConfiguration(
 );
 $connection = new DatabaseConnection($config);
 $wifiSpot = new HandleWifiSpots($connection);
-// $items = $wifiSpot->getAllItems();
+$items = $wifiSpot->getAllItems();
+
+//echo "<pre>";
+//print_r($items);
+//die;
 
 ?>
 <!doctype html>
@@ -64,30 +70,24 @@ $wifiSpot = new HandleWifiSpots($connection);
             </tr>
             </thead>
             <tbody>
+            <?php foreach ($items as $k => $v) { ?>
             <tr>
-                <th>1</th>
-                <td>Citizen Kane</td>
-                <td>1941</td>
-                <td><a href="">1941</a></td>
+                <th><?php echo ($k + 1); ?></th>
+                <td><?php echo $v["WiFiName"]; ?></td>
+                <td><?php echo $v["Address"]; ?></td>
                 <td>
-                    <button class="fas fa-pencil-alt"></button>
+                    <a href="view.php?itemId=<?php echo $v["idWiFiSpots"]; ?>">
+                        <button type="button" class="btn btn-sm btn-info"><i class="fas fa-info-circle"></i></button>
+                    </a>
                 </td>
                 <td>
-                    <button class="fas fa-trash-alt"></button>
+                    <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-pencil-alt"></i></button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
                 </td>
             </tr>
-            <tr>
-                <th>2</th>
-                <td>Casablanca</td>
-                <td>1942</td>
-                <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
-                <td>
-                    <button class="fas fa-pencil-alt"></button>
-                </td>
-                <td>
-                    <button class="fas fa-trash-alt"></button>
-                </td>
-            </tr>
+            <?php } ?>
             </tbody>
         </table>
     </div>
