@@ -8,9 +8,9 @@ require 'admin/app/HandleWifiSpots.php';
 
 class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
 {
-
-    public function testGetAll()
+    public function testGetConnection()
     {
+        // this test MUST WORK for all the other tests to work
         $config = new DatabaseConfiguration(
             ConfigEnum::DB_HOST,
             ConfigEnum::DB_PORT,
@@ -19,8 +19,28 @@ class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
             ConfigEnum::DB_PASSWORD
         );
         $connection = new DatabaseConnection($config);
-        $h = new HandleWifiSpots($connection);
+        $this->assertNotNull($connection->getInstance());
+        return $connection;
+    }
+
+    public function testGetAllItems()
+    {
+        $h = new HandleWifiSpots($this->testGetConnection());
         $this->assertNotEmpty($h->getAllItems());
         $this->assertNotNull($h->getAllItems());
+    }
+
+    public function testGetItemById()
+    {
+        $id = 1; // this record must exist
+        $h = new HandleWifiSpots($this->testGetConnection());
+        $this->assertNotNull($h->getItemById($id));
+    }
+
+    public function testIsItemExists()
+    {
+        $id = 1;
+        $h = new HandleWifiSpots($this->testGetConnection());
+        $this->assertTrue($h->isItemExists($id));
     }
 }

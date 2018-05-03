@@ -1,19 +1,30 @@
 <?php
 
-require 'admin/app/ConfigEnum.php';
-require 'admin/app/DatabaseConfiguration.php';
-require 'admin/app/DatabaseConnection.php';
+require 'app/ConfigEnum.php';
+require 'app/DatabaseConfiguration.php';
+require 'app/DatabaseConnection.php';
+require 'app/dao/WifiSpotsDao.php';
+require 'app/HandleWifiSpots.php';
 
-$config = new DatabaseConfiguration(
-    ConfigEnum::DB_HOST,
-    ConfigEnum::DB_PORT,
-    ConfigEnum::DB_NAME,
-    ConfigEnum::DB_USER,
-    ConfigEnum::DB_PASSWORD
-);
-$connection = new DatabaseConnection($config);
-$wifiSpot = new HandleWifiSpots($connection);
+$v = null;
+$isExist = false;
+if (isset($_GET["itemId"])) {
+    $config = new DatabaseConfiguration(
+        ConfigEnum::DB_HOST,
+        ConfigEnum::DB_PORT,
+        ConfigEnum::DB_NAME,
+        ConfigEnum::DB_USER,
+        ConfigEnum::DB_PASSWORD
+    );
+    $connection = new DatabaseConnection($config);
+    $wifiSpot = new HandleWifiSpots($connection);
 
+    $itemId = $_GET["itemId"];
+    if ($wifiSpot->isItemExists($itemId)) {
+        $v = $wifiSpot->getItemById($itemId);
+        $isExist = true;
+    }
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -49,9 +60,59 @@ $wifiSpot = new HandleWifiSpots($connection);
 </header>
 
 <main role="main" class="container">
-    
+    <?php if (!$isExist) { ?>
+        <div class="alert alert-dark mt-4" role="alert">
+            This entry <span class="alert-link">does not exist</span>.
+        </div>
+    <?php } ?>
+    <h3 class="mt-4 mb-4">Details about this entry</h3>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="wifiname">Spot name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="wifiname" readonly
+                   value="<?php echo $v["WiFiName"];?> ">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="address">Spot Address:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="address" name="address" readonly
+            value="<?php echo $v["Address"];?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="latitude">Latitude:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="latitude" name="latitude" readonly
+            value="<?php echo $v["latitude"];?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="longitude">Longitude:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="longitude" name="longitude" readonly
+            value="<?php echo $v["longitude"];?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="isPaid">Paid </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="isPaid" readonly value="<?php echo $v["Paid"];?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="userPerDay">Users per day </label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="userPerDay" readonly value="<?php echo $v["UsersPerDay"];?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="wifiStrength">Wifi strength</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="wifiStrength" readonly value="<?php echo $v["Strength"];?>">
+        </div>
+    </div>
 </main>
-
 
 <footer class="footer">
     <div class="container">

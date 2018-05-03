@@ -10,7 +10,7 @@ class HandleWifiSpots extends WifiSpotsDao
 
     public function isItemExists($id)
     {
-        return !isNull($this->getItemById($id));
+        return $this->getItemById($id) != null;
     }
 
     public function getItemById($id)
