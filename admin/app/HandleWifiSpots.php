@@ -1,9 +1,5 @@
 <?php
 
-
-use admin\app\dao\WifiSpotsDao;
-use admin\app\DatabaseConnection;
-
 class HandleWifiSpots extends WifiSpotsDao
 {
 

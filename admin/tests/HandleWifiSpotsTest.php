@@ -3,11 +3,13 @@
 require 'admin/app/ConfigEnum.php';
 require 'admin/app/DatabaseConfiguration.php';
 require 'admin/app/DatabaseConnection.php';
+require 'admin/app/dao/WifiSpotsDao.php';
+require 'admin/app/HandleWifiSpots.php';
 
-class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
+class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testConnection()
+    public function testGetAll()
     {
         $config = new DatabaseConfiguration(
             ConfigEnum::DB_HOST,
@@ -17,6 +19,8 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase
             ConfigEnum::DB_PASSWORD
         );
         $connection = new DatabaseConnection($config);
-        $this->assertNotNull($connection->getInstance());
+        $h = new HandleWifiSpots($connection);
+        $this->assertNotEmpty($h->getAllItems());
+        $this->assertNotNull($h->getAllItems());
     }
 }

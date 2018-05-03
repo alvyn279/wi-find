@@ -1,7 +1,5 @@
 <?php
 
-namespace admin\app;
-
 class DatabaseConfiguration
 {
     private $host;

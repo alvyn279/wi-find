@@ -1,10 +1,5 @@
 <?php
 
-namespace admin\app;
-
-use PDO;
-use PDOException;
-
 class DatabaseConnection
 {
     private $configuration;

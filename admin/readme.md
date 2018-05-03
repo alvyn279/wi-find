@@ -8,9 +8,6 @@
 
 ### Running PHP unit tests
 ```
-./vendor/bin/phpunit admin/tests
-```
-```
 ./vendor/bin/phpunit admin/tests/FileName.php
 ```
 ```

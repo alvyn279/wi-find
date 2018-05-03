@@ -1,7 +1,5 @@
 <?php
 
-namespace admin\app;
-
 abstract class ConfigEnum
 {
     const DB_PORT     = "3306";

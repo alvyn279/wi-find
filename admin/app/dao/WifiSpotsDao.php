@@ -1,10 +1,5 @@
 <?php
 
-namespace admin\app\dao;
-
-use admin\app\DatabaseConnection;
-use PDO;
-
 class WifiSpotsDao
 {
     private $connection;
