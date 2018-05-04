@@ -59,7 +59,7 @@ $items = $wifiSpot->getAllItems();
         <table class="table" id="entryTable">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>#</th>
                 <th class="text-hide p-0"></th>
                 <th>Spot Name</th>
                 <th>Address</th>
@@ -142,6 +142,6 @@ $items = $wifiSpot->getAllItems();
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
-<script src="js/handle-delete-request.js"></script>
+<script src="js/handle-requests.js"></script>
 </body>
 </html>
