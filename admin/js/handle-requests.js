@@ -28,8 +28,7 @@ var actions = {
 
 var appendResponse = function (response) {
     actions.deletionSuccess().modalId.modal('show');
-    actions.deletionSuccess().modalId.find(".alert").empty();
-    actions.deletionSuccess().modalId.find(".alert").prepend(response);
+    actions.deletionSuccess().modalId.find(".alert").empty().prepend(response);
     actions.deletionSuccess().modalCloseBtn.click(function (e) {
         e.preventDefault();
         actions.deletionSuccess().modalId.modal('hide');
