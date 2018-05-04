@@ -53,4 +53,13 @@ class HandleWifiSpots extends WifiSpotsDao
             }
         }
     }
+
+    public function updateWifiSpot(WifiSpots $w)
+    {
+        if ($this->update($w)) {
+            $this->setExecutionFeedback("You have successfully updated this item.");
+        } else {
+            $this->setExecutionFeedback("Server error. Please try again later");
+        }
+    }
 }

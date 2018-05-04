@@ -2,6 +2,7 @@
 
 class WifiSpots
 {
+    private $id;
     private $wifiName;
     private $strength;
     private $paid;
@@ -13,6 +14,16 @@ class WifiSpots
 
     public function __construct()
     {
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getWifiName()

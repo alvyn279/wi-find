@@ -33,4 +33,24 @@ class WifiSpotsDao
         $exec = $stmt->rowCount();
         return $exec;
     }
+
+    protected function update(WifiSpots $w)
+    {
+        $sql = "UPDATE ";
+        $sql .= $this->tableName;
+        $sql .= " SET";
+        $sql .= "`WiFiName` = '" . $w->getWifiName() . "',";
+        $sql .= "`Strength` = '" . $w->getStrength() . "',";
+        $sql .= "`Paid` = '" . $w->getPaid() . "',";
+        $sql .= "`UsersPerDay` = '" . $w->getUserPerDay() . "',";
+        $sql .= "`latitude` = '" . $w->getLatitude() . "',";
+        $sql .= "`longitude` = '" . $w->getLongitude() . "',";
+        $sql .= "`Address` = '" . $w->getAddress() . "',";
+        $sql .= "`DateRegistered` = " . date("Y-m-d");
+        $sql .= " WHERE ";
+        $sql .= "`wifispots`.`idWiFiSpots` = " . $w->getId();
+        $stmt = $this->connection->getInstance()->prepare($sql);
+        $exec = $stmt->execute();
+        return $exec;
+    }
 }

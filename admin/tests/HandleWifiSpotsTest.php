@@ -5,6 +5,7 @@ require 'admin/app/DatabaseConfiguration.php';
 require 'admin/app/DatabaseConnection.php';
 require 'admin/app/dao/WifiSpotsDao.php';
 require 'admin/app/HandleWifiSpots.php';
+require 'admin/app/WifiSpots.php';
 
 class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
 {
@@ -55,6 +56,33 @@ class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
             $h->deleteItems($ids);
             $this->assertFalse($h->isItemExists($ids[0]));
             $this->assertFalse($h->isItemExists($ids[1]));
+        }
+    }
+
+    public function testUpdateWifiSpots()
+    {
+        $h = new HandleWifiSpots($this->testGetConnection());
+        $w = new WifiSpots();
+        // to simulate a successful test,
+        // choose an arbitrary id that exist
+        $id = 999;
+        if ($h->isItemExists($id))
+        {
+            $oldHash = hash("md5", json_encode($h->getItemById($id)));
+
+            $w->setId(4);
+            $w->setWifiName("test");
+            $w->setStrength(5);
+            $w->setPaid("test");
+            $w->setUserPerDay("2222");
+            $w->setLatitude("43.33");
+            $w->setLongitude("43.334");
+            $w->setAddress("test");
+            $w->setDateRegistered(date("Y-m-d"));
+            $h->updateWifiSpot($w);
+
+            $newHash = hash("md5", json_encode($h->getItemById($id)));
+            $this->assertNotEquals($oldHash, $newHash);
         }
     }
 }
