@@ -2,10 +2,21 @@
 
 class HandleWifiSpots extends WifiSpotsDao
 {
+    private $executionFeedback;
 
     public function __construct(DatabaseConnection $connection)
     {
         parent::__construct($connection);
+    }
+
+    public function getExecutionFeedback()
+    {
+        return $this->executionFeedback;
+    }
+
+    public function setExecutionFeedback($executionFeedback)
+    {
+        $this->executionFeedback = $executionFeedback;
     }
 
     public function isItemExists($id)
@@ -28,5 +39,18 @@ class HandleWifiSpots extends WifiSpotsDao
     public function getAllItems()
     {
         return $this->getData();
+    }
+
+    public function deleteItems($items)
+    {
+        $outSuccess = "You have successfully deleted the(se) item(s).";
+        $outFailure = "Error occurred in the server. Please try again later.";
+        for ($i = 0; $i < count($items); $i++) {
+            if ($this->delete($items[$i])) {
+                $this->setExecutionFeedback($outSuccess);
+            } else {
+                $this->setExecutionFeedback($outFailure);
+            }
+        }
     }
 }

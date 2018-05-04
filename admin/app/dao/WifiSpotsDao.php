@@ -24,4 +24,13 @@ class WifiSpotsDao
         $this->fetchAllData();
         return $this->data;
     }
+
+    protected function delete($id)
+    {
+        $sql = "DELETE FROM " . $this->tableName . " WHERE `wifispots`.`idWiFiSpots` = ?";
+        $stmt = $this->connection->getInstance()->prepare($sql);
+        $stmt->execute([$id]);
+        $exec = $stmt->rowCount();
+        return $exec;
+    }
 }

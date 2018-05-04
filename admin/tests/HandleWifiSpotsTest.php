@@ -43,4 +43,18 @@ class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
         $h = new HandleWifiSpots($this->testGetConnection());
         $this->assertTrue($h->isItemExists($id));
     }
+
+    public function testDeleteItems()
+    {
+        $ids = array(4, 5); // 4 and 5 must exist to simulate a successful deletion
+        $h = new HandleWifiSpots($this->testGetConnection());
+        if ($h->isItemExists($ids[0]) && $h->isItemExists($ids[1]))
+        {
+            // delete the items then assert that they no longer exist
+            // isItemExists returns true if an item exists
+            $h->deleteItems($ids);
+            $this->assertFalse($h->isItemExists($ids[0]));
+            $this->assertFalse($h->isItemExists($ids[1]));
+        }
+    }
 }
