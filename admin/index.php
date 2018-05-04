@@ -17,9 +17,9 @@ $connection = new DatabaseConnection($config);
 $wifiSpot = new HandleWifiSpots($connection);
 $items = $wifiSpot->getAllItems();
 
-//echo "<pre>";
-//print_r($items);
-//die;
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deletion"])) {
+    $itemIds = $_POST["items"];
+}
 
 ?>
 <!doctype html>
@@ -29,6 +29,8 @@ $items = $wifiSpot->getAllItems();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
     <title>Wi-Find Admin Page</title>
@@ -44,7 +46,7 @@ $items = $wifiSpot->getAllItems();
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -56,23 +58,24 @@ $items = $wifiSpot->getAllItems();
 </header>
 
 <main role="main" class="container">
-    <div class="mt-3">
+    <div class="mt-3" id="tableContainer">
         <h2>List of entries</h2>
-        <table class="table table-striped">
+        <table class="table" id="entryTable">
             <thead>
             <tr>
                 <th>Id</th>
+                <th class="text-hide p-0"></th>
                 <th>Spot Name</th>
                 <th>Address</th>
                 <th>View Details</th>
                 <th>Edit</th>
-                <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <?php foreach ($items as $k => $v) { ?>
             <tr>
                 <th><?php echo ($k + 1); ?></th>
+                <td class="text-hide p-0" data-id="<?php echo $v["idWiFiSpots"]; ?>"><?php echo $v["idWiFiSpots"]; ?></td>
                 <td><?php echo $v["WiFiName"]; ?></td>
                 <td><?php echo $v["Address"]; ?></td>
                 <td>
@@ -83,16 +86,36 @@ $items = $wifiSpot->getAllItems();
                 <td>
                     <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-pencil-alt"></i></button>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
-                </td>
             </tr>
             <?php } ?>
             </tbody>
         </table>
+        <div class="my-3">
+            <label class="text-secondary font-weight-bold">With selected:</label>
+            <button type="button" id="confirmDeletion" class="btn btn-outline-danger btn-sm">
+                <i class="fas fa-trash-alt mr-1"></i>Delete</button>
+        </div>
+    </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm deletion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this item? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="deleteTrue">Confirm</button>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
-
 
 <footer class="footer">
     <div class="container">
@@ -109,5 +132,8 @@ $items = $wifiSpot->getAllItems();
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+<script src="js/handle-delete-request.js"></script>
 </body>
 </html>
