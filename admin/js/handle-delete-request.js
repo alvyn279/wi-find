@@ -37,7 +37,6 @@ var appendResponse = function (response) {
     })
 };
 
-
 var deleteItems = function () {
   actions.delete().mainBtn.click(function() {
       if (getSelectedItems().length === 0) {
@@ -51,7 +50,6 @@ var deleteItems = function () {
       });
   });
 };
-
 
 var deleteRequestUsingAjax = function (selectedItems) {
     $.ajax({
