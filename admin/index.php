@@ -17,10 +17,6 @@ $connection = new DatabaseConnection($config);
 $wifiSpot = new HandleWifiSpots($connection);
 $items = $wifiSpot->getAllItems();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deletion"])) {
-    $itemIds = $_POST["items"];
-}
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deletion"])) {
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
-    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/sticky-footer-navbar.css">
 
     <title>Wi-Find Admin Page</title>
 </head>
@@ -110,7 +106,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deletion"])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="deleteTrue">Confirm</button>
+                    <button type="button" class="btn btn-danger" id="deleteConfirm">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="deletionSuccessModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="alert alert-success" role="alert"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="deletionSuccessClose">Close</button>
                 </div>
             </div>
         </div>
