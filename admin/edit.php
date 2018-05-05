@@ -3,6 +3,8 @@
 require 'app/ConfigEnum.php';
 require 'app/DatabaseConfiguration.php';
 require 'app/DatabaseConnection.php';
+require 'app/dao/WifiSpotsDao.php';
+require 'app/HandleWifiSpots.php';
 
 $config = new DatabaseConfiguration(
     ConfigEnum::DB_HOST,
@@ -14,17 +16,44 @@ $config = new DatabaseConfiguration(
 $connection = new DatabaseConnection($config);
 $wifiSpot = new HandleWifiSpots($connection);
 
+$v = null;
+$isExist = false;
+if (isset($_GET["itemId"])) {
+    $config = new DatabaseConfiguration(
+        ConfigEnum::DB_HOST,
+        ConfigEnum::DB_PORT,
+        ConfigEnum::DB_NAME,
+        ConfigEnum::DB_USER,
+        ConfigEnum::DB_PASSWORD
+    );
+    $connection = new DatabaseConnection($config);
+    $wifiSpot = new HandleWifiSpots($connection);
+
+    $itemId = $_GET["itemId"];
+    if ($wifiSpot->isItemExists($itemId)) {
+        $v = $wifiSpot->getItemById($itemId);
+        $isExist = true;
+    }
+}
+
+function checkInputRadioForStrength($num, $v)
+{
+    if ($v == $num) {
+        echo "checked";
+    }
+}
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="shortcut icon" type="image/x-icon" href="../wifind.ico"/>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
-    <title>Wi-Find Admin Page</title>
+    <title>Wi-Find Edit Entry</title>
 </head>
 <body>
 <header>
@@ -49,9 +78,87 @@ $wifiSpot = new HandleWifiSpots($connection);
 </header>
 
 <main role="main" class="container">
-
+    <?php if (!$isExist) { ?>
+        <div class="alert alert-dark mt-4" role="alert">
+            This entry <span class="alert-link">does not exist</span>.
+        </div>
+    <?php } ?>
+    <h3 class="mt-4 mb-4">Update this entry</h3>
+    <form class="form-horizontal" method="post" action="" id="updateEntryForm">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="wifiname">Spot name:</label>
+            <div class="input-group col-sm-10">
+                <input type="text" class="form-control" id="wifiname"  name="wifiname"
+                value="<?php echo $v["WiFiName"];?>">
+                <div class="input-group-append">
+                    <span class="input-group-text btn" id="basic-addon2"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="address">Spot Address:</label>
+            <div class="input-group col-sm-10">
+                <input type="text" class="form-control" id="address" onfocus="geolocate()" name="address"
+                value="<?php echo $v["Address"];?>">
+                <div class="input-group-append">
+                    <span class="input-group-text btn" id="basic-addon2"><i class="fa fa-times"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group mb-0">
+            <label class="control-label col-sm-2" for="formatted-address">Formatted address:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="formatted-address" name="formatted-address" readonly="">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="get-lat-long"></label>
+            <div class="col-sm-4">
+                <input type="button" class="btn btn-outline-dark" id="get-lat-long" onclick="getCoordinates()" name="get-lat-long"
+                       value="Get Latitude & Longitude">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="latitude">Latitude:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="latitude" name="latitude" readonly=""
+                value="<?php echo $v["latitude"];?>">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="longitude">Longitude:</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="longitude" name="longitude" readonly=""
+               value="<?php echo $v["longitude"];?>">
+            </div>
+        </div>
+        <div class="form-group col-md-4">
+            <div class="row">
+                <div class="col">
+                    <input type="radio" value="0" <?php checkInputRadioForStrength(0, $v["Strength"]); ?> name="strength">&nbsp;0
+                </div>
+                <div class="col">
+                    <input type="radio" value="1" <?php checkInputRadioForStrength(1, $v["Strength"]); ?> name="strength">&nbsp;1
+                </div>
+                <div class="col">
+                    <input type="radio" value="2" <?php checkInputRadioForStrength(2, $v["Strength"]); ?> name="strength">&nbsp;2
+                </div>
+                <div class="col">
+                    <input type="radio" value="3" <?php checkInputRadioForStrength(3, $v["Strength"]); ?> name="strength">&nbsp;3
+                </div>
+                <div class="col">
+                    <input type="radio" value="4" <?php checkInputRadioForStrength(4, $v["Strength"]); ?> name="strength">&nbsp;4
+                </div>
+                <div class="col">
+                    <input type="radio" value="5" <?php checkInputRadioForStrength(5, $v["Strength"]); ?> name="strength">&nbsp;5
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-sm-12">
+            <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+        </div>
+    </form>
 </main>
-
 
 <footer class="footer">
     <div class="container">
@@ -68,5 +175,7 @@ $wifiSpot = new HandleWifiSpots($connection);
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../js/gps-coordinates.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQG5yAn1cybxAKDpFrVyiWWyg3FEt3gMg&libraries=places&callback=initAutocomplete"></script>
 </body>
 </html>

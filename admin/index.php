@@ -23,7 +23,7 @@ $items = $wifiSpot->getAllItems();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="shortcut icon" type="image/x-icon" href="../wifind.ico"/>
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.5/css/select.dataTables.min.css">
@@ -80,7 +80,9 @@ $items = $wifiSpot->getAllItems();
                     </a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-pencil-alt"></i></button>
+                    <a href="edit.php?itemId=<?php echo $v["idWiFiSpots"]; ?>">
+                        <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-pencil-alt"></i></button>
+                    </a>
                 </td>
             </tr>
             <?php } ?>
