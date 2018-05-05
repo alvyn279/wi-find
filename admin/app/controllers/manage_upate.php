@@ -7,10 +7,8 @@ require '../dao/WifiSpotsDao.php';
 require '../HandleWifiSpots.php';
 require '../WifiSpots.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST")
-{
-    if (isset($_POST["updateSubmitBtn"]) && $_POST["updateSubmitBtn"] == "submit")
-    {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["updateSubmitBtn"]) && $_POST["updateSubmitBtn"] == "submit") {
         echo "<pre>";
         print_r($_POST);
         // TODO
