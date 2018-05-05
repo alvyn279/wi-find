@@ -1,7 +1,6 @@
 var getSelectedItems = function () {
     return $('#entryTable tr.selected');
 };
-
 var getIdsFromSelectedItems = function () {
     var id = [];
     getSelectedItems().each(function () {
@@ -9,7 +8,6 @@ var getIdsFromSelectedItems = function () {
     });
     return id;
 };
-
 var actions = {
     delete: function () {
         return {
@@ -25,7 +23,6 @@ var actions = {
         }
     }
 };
-
 var appendResponse = function (response) {
     actions.deletionSuccess().modalId.modal('show');
     actions.deletionSuccess().modalId.find(".alert").empty().prepend(response);
@@ -35,7 +32,6 @@ var appendResponse = function (response) {
         setTimeout(location.reload.bind(location), 500);
     })
 };
-
 var deleteItems = function () {
   actions.delete().mainBtn.click(function() {
       if (getSelectedItems().length === 0) {
@@ -49,10 +45,9 @@ var deleteItems = function () {
       });
   });
 };
-
 var deleteRequestUsingAjax = function (selectedItems) {
     $.ajax({
-        url: 'app/manage_deletion.php',
+        url: 'app/controllers/manage_deletion.php',
         type: 'post',
         data: {items: selectedItems, deletion: true}
     }).done(function (response) {
@@ -60,7 +55,6 @@ var deleteRequestUsingAjax = function (selectedItems) {
         appendResponse(response);
     });
 };
-
 $(document).ready(function () {
     $('#entryTable').DataTable({
         responsive: true,
@@ -69,6 +63,5 @@ $(document).ready(function () {
         },
         'pageLength': 6
     });
-
     deleteItems();
 });

@@ -84,7 +84,7 @@ function checkInputRadioForStrength($num, $v)
         </div>
     <?php } ?>
     <h3 class="mt-4 mb-4">Update this entry</h3>
-    <form class="form-horizontal" method="post" action="" id="updateEntryForm">
+    <form class="form-horizontal" method="post" id="updateEntryForm" action="app/controllers/manage_upate.php">
         <div class="form-group">
             <label class="control-label col-sm-2" for="wifiname">Spot name:</label>
             <div class="input-group col-sm-10">
@@ -155,7 +155,7 @@ function checkInputRadioForStrength($num, $v)
             </div>
         </div>
         <div class="form-group col-sm-12">
-            <button type="submit" class="btn btn-secondary mt-2">Submit</button>
+            <input type="submit" class="btn btn-secondary mt-2" name="updateSubmitBtn" value="submit">
         </div>
     </form>
 </main>
