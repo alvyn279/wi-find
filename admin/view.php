@@ -3,8 +3,9 @@
 require 'app/ConfigEnum.php';
 require 'app/DatabaseConfiguration.php';
 require 'app/DatabaseConnection.php';
+require 'app/models/WifiSpots.php';
 require 'app/dao/WifiSpotsDao.php';
-require 'app/HandleWifiSpots.php';
+require 'app/handlers/HandleWifiSpots.php';
 
 $v = null;
 $isExist = false;
