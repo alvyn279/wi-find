@@ -3,10 +3,14 @@
 require 'admin/app/ConfigEnum.php';
 require 'admin/app/DatabaseConfiguration.php';
 require 'admin/app/DatabaseConnection.php';
+require 'admin/app/models/WifiSpots.php';
 require 'admin/app/dao/WifiSpotsDao.php';
-require 'admin/app/HandleWifiSpots.php';
-require 'admin/app/WifiSpots.php';
+require 'admin/app/handlers/HandleWifiSpots.php';
 
+/**
+ * Class HandleWifiSpotsTest
+ * run the tests in bash: ./vendor/bin/phpunit admin/tests/HandleWifiSpotsTest.php
+ */
 class HandleWifiSpotsTest extends PHPUnit_Framework_TestCase
 {
     public function testGetConnection()

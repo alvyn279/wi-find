@@ -5,3 +5,7 @@ CREATE TABLE `administrator`(
   `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
+
+INSERT INTO `administrator` (`id`, `email`, `username`, `password`) VALUES
+(1, 'admin@gmail.com', 'admin', 'admin'),
+(2, 'wifind@gmail.com', 'wifind', 'wifind');
