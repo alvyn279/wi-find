@@ -33,16 +33,43 @@
 <main role="main" class="container text-center">
     <div class="row">
         <div class="col-4"></div>
-        <div class="col">
-            <form class="form-signin" id="login-form">
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" id="inputEmail" name="inputEmail" class="form-control" placeholder="Email address">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" name="inputPassword" class="form-control"
-                       placeholder="Password">
-                <button class="btn btn-lg btn-default btn-block" type="submit">Sign in</button>
-            </form>
+        <div class="col-4">
+            <div class="card">
+                <article class="card-body">
+                    <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
+                    <hr>
+                    <p class="text-success text-center">Some message goes here</p>
+                    <form class="form" role="form" autocomplete="off" id="loginForm" method="post">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                </div>
+                                <input class="form-control" placeholder="Email or login"
+                                       id="loginEmail"
+                                       name="loginEmail"
+                                       type="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                                </div>
+                                <input class="form-control" placeholder="password"
+                                       id="loginPassword"
+                                       name="loginPassword"
+                                       type="password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary btn-block"
+                                   value="Login"
+                                   name="loginSubmitBtn">
+                        </div>
+                    </form>
+                </article>
+            </div>
         </div>
         <div class="col-4"></div>
     </div>
@@ -63,5 +90,8 @@
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.2.5/js/dataTables.select.min.js"></script>
+<script src="js/handle-requests.js"></script>
 </body>
 </html>

@@ -21,6 +21,14 @@ var actions = {
             modalId: $('#deletionSuccessModal'),
             modalCloseBtn: $('#deletionSuccessClose')
         }
+    },
+    login: function () {
+        return {
+            formId: $('#loginForm'),
+            email: $('input[name="loginEmail"]').val(),
+            password: $('input[name="loginPassword"]').val(),
+            submitBtn: $('input[name="loginSubmitBtn"]').val()
+        };
     }
 };
 var appendResponse = function (response) {
@@ -55,6 +63,15 @@ var deleteRequestUsingAjax = function (selectedItems) {
         appendResponse(response);
     });
 };
+var loginSubmit = function () {
+    var loginData = actions.login().formId.serialize();
+    $.ajax({
+        url: 'app/controllers/manage_login.php',
+        type: 'post',
+        data: loginData
+    }).done(function (response) {
+    });
+};
 $(document).ready(function () {
     $('#entryTable').DataTable({
         responsive: true,
@@ -64,4 +81,9 @@ $(document).ready(function () {
         'pageLength': 6
     });
     deleteItems();
+    actions.login().formId.submit(function (e) {
+        loginSubmit();
+        e.preventDefault();
+        return false;
+    });
 });
