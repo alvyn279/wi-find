@@ -9,4 +9,17 @@
 - use query string to get values of an item in view and edit page:
   - view.php?itemId=1
   - edit.php?itemId=1
-  
+
+### Order of imports
+  1. classes in root `app/` directory
+  2. classes in `app/models/`
+  3. classes in `app/dao/`
+  4. classes in `app/handlers/`
+```
+require 'app/ConfigEnum.php';
+require 'app/DatabaseConfiguration.php';
+require 'app/DatabaseConnection.php';
+require 'app/models/WifiSpots.php';
+require 'app/dao/WifiSpotsDao.php';
+require 'app/handlers/HandleWifiSpots.php';
+```  
