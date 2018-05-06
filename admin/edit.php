@@ -85,13 +85,13 @@ function checkInputRadioForStrength($num, $v)
         </div>
     <?php } ?>
     <h3 class="mt-4 mb-4">Update this entry</h3>
-    <form class="form-horizontal" method="post" id="updateEntryForm" action="app/controllers/manage_upate.php">
+    <form class="form-horizontal" method="post" id="updateEntryForm" action="app/controllers/manage_update.php">
         <div class="form-group">
             <label class="control-label col-sm-2" for="wifiname">Spot name:</label>
             <div class="input-group col-sm-10">
-                <input type="text" class="form-control" id="wifiname"  name="wifiname"
+                <input type="text" class="form-control" id="wifiname"  name="wifiname" placeholder="Enter a spot name"
                 value="<?php echo $v["WiFiName"];?>">
-                <div class="input-group-append">
+                <div class="input-group-append clear-input">
                     <span class="input-group-text btn" id="basic-addon2"><i class="fa fa-times"></i></span>
                 </div>
             </div>
@@ -101,7 +101,7 @@ function checkInputRadioForStrength($num, $v)
             <div class="input-group col-sm-10">
                 <input type="text" class="form-control" id="address" onfocus="geolocate()" name="address"
                 value="<?php echo $v["Address"];?>">
-                <div class="input-group-append">
+                <div class="input-group-append clear-input">
                     <span class="input-group-text btn" id="basic-addon2"><i class="fa fa-times"></i></span>
                 </div>
             </div>
@@ -156,7 +156,7 @@ function checkInputRadioForStrength($num, $v)
             </div>
         </div>
         <div class="form-group col-sm-12">
-            <input type="submit" class="btn btn-secondary mt-2" name="updateSubmitBtn" value="submit">
+            <input type="submit" class="btn btn-secondary mt-2" name="updateSubmitBtn" value="Submit">
         </div>
     </form>
 </main>
@@ -178,5 +178,14 @@ function checkInputRadioForStrength($num, $v)
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="../js/gps-coordinates.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQG5yAn1cybxAKDpFrVyiWWyg3FEt3gMg&libraries=places&callback=initAutocomplete"></script>
+<script>
+$(document).ready(function () {
+    $('.clear-input').click(function (e) {
+        e.preventDefault();
+        $(this).parent().find('input').val('');
+        return false;
+    })
+});
+</script>
 </body>
 </html>

@@ -3,12 +3,12 @@
 require '../ConfigEnum.php';
 require '../DatabaseConfiguration.php';
 require '../DatabaseConnection.php';
+require '../models/WifiSpots.php';
 require '../dao/WifiSpotsDao.php';
-require '../HandleWifiSpots.php';
-require '../WifiSpots.php';
+require '../handlers/HandleWifiSpots.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["updateSubmitBtn"]) && $_POST["updateSubmitBtn"] == "submit") {
+    if (isset($_POST["updateSubmitBtn"])) {
         echo "<pre>";
         print_r($_POST);
         // TODO

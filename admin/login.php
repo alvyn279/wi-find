@@ -32,8 +32,7 @@
 
 <main role="main" class="container text-center">
     <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
+        <div class="col-sm-4">
             <div class="card">
                 <article class="card-body">
                     <h4 class="card-title text-center mb-4 mt-1">Sign in</h4>
@@ -71,7 +70,8 @@
                 </article>
             </div>
         </div>
-        <div class="col-4"></div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4"></div>
     </div>
 </main>
 
