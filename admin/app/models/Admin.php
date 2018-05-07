@@ -51,10 +51,4 @@ class Admin
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
         $this->password = $hashed_password;
     }
-
-    public function getAdminUsername($email)
-    {
-        $positionOfAt = strpos($email, "@");
-        return substr($email, 0, $positionOfAt);
-    }
 }

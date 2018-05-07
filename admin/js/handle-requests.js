@@ -27,7 +27,8 @@ var actions = {
             formId: $('#loginForm'),
             email: $('input[name="loginEmail"]').val(),
             password: $('input[name="loginPassword"]').val(),
-            submitBtn: $('input[name="loginSubmitBtn"]').val()
+            submitBtn: $('input[name="loginSubmitBtn"]').val(),
+            errorMsg: $('.error-msg')
         };
     }
 };
@@ -70,6 +71,7 @@ var loginSubmit = function () {
         type: 'post',
         data: loginData
     }).done(function (response) {
+        actions.login().errorMsg.empty().prepend(response);
     });
 };
 $(document).ready(function () {

@@ -29,16 +29,38 @@ class HandleAdminTest extends PHPUnit_Framework_TestCase
 
     public function testGetAllAdmins()
     {
-
+        $h = new HandleAdmin($this->testGetConnection());
+        $this->assertNotEmpty($h->getAllAdmins());
+        $this->assertNotNull($h->getAllAdmins());
     }
 
     public function testGetAdminByUsername()
     {
-
+        $username = "hello";
+        $h = new HandleAdmin($this->testGetConnection());
+        $this->assertNull($h->getAdminByUsername($username));
     }
 
     public function testIsAdminUserExists()
     {
+        $username = "hello";
+        $h = new HandleAdmin($this->testGetConnection());
+        $this->assertFalse($h->isAdminUserExists($username));
+    }
 
+    public function testGetPasswordOfAdmin()
+    {
+        $username = "admin";
+        $password = "admin";
+        $h = new HandleAdmin($this->testGetConnection());
+        $this->assertEquals($password, $h->getPasswordByUsername($username));
+    }
+
+    public function testGetAdminUsernameByEmail()
+    {
+        $email = "hello@world.com";
+        $username = "hello";
+        $h = new HandleAdmin($this->testGetConnection());
+        $this->assertEquals($username, $h->getAdminUsernameByEmail($email));
     }
 }

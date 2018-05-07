@@ -44,4 +44,15 @@ class HandleAdmin extends AdminDao
             return null;
         }
     }
+
+    public function getPasswordByUsername($username)
+    {
+        return $this->getAdminByUsername($username)["password"];
+    }
+
+    public function getAdminUsernameByEmail($email)
+    {
+        $positionOfAt = strpos($email, "@");
+        return substr($email, 0, $positionOfAt);
+    }
 }
