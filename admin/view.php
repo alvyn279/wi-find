@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 
 require 'app/ConfigEnum.php';
 require 'app/DatabaseConfiguration.php';
@@ -7,23 +9,32 @@ require 'app/models/WifiSpots.php';
 require 'app/dao/WifiSpotsDao.php';
 require 'app/handlers/HandleWifiSpots.php';
 
+$isLoggedIn = false;
+$adminUsername = null;
 $v = null;
 $isExist = false;
-if (isset($_GET["itemId"])) {
-    $config = new DatabaseConfiguration(
-        ConfigEnum::DB_HOST,
-        ConfigEnum::DB_PORT,
-        ConfigEnum::DB_NAME,
-        ConfigEnum::DB_USER,
-        ConfigEnum::DB_PASSWORD
-    );
-    $connection = new DatabaseConnection($config);
-    $wifiSpot = new HandleWifiSpots($connection);
+if (isset($_SESSION)) {
+    if (isset($_SESSION["authenticated"]) && isset($_SESSION["adminUsername"])) {
+        $isLoggedIn = true;
+        $adminUsername = $_SESSION["adminUsername"];
 
-    $itemId = $_GET["itemId"];
-    if ($wifiSpot->isItemExists($itemId)) {
-        $v = $wifiSpot->getItemById($itemId);
-        $isExist = true;
+        if (isset($_GET["itemId"])) {
+            $config = new DatabaseConfiguration(
+                ConfigEnum::DB_HOST,
+                ConfigEnum::DB_PORT,
+                ConfigEnum::DB_NAME,
+                ConfigEnum::DB_USER,
+                ConfigEnum::DB_PASSWORD
+            );
+            $connection = new DatabaseConnection($config);
+            $wifiSpot = new HandleWifiSpots($connection);
+
+            $itemId = $_GET["itemId"];
+            if ($wifiSpot->isItemExists($itemId)) {
+                $v = $wifiSpot->getItemById($itemId);
+                $isExist = true;
+            }
+        }
     }
 }
 ?>
@@ -52,10 +63,15 @@ if (isset($_GET["itemId"])) {
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-
-            <div class="form-inline mt-2 mt-md-0">
-                <a class="nav-link" href="#">Logout</a>
-            </div>
+            <?php if ($isLoggedIn) { ?>
+                <div class="form-inline mt-2 mt-md-0">
+                    <h5 class="text-white pr-2"><?php echo $adminUsername; ?></h5><a class="btn btn-light" id="sign-out"><i class="fa fa-sign-out-alt"></i></a>
+                </div>
+            <?php } else { ?>
+                <div class="form-inline mt-2 mt-md-0">
+                    <h5 class="text-white pr-2">Sign in</h5><a class="btn btn-light" href="login.php"><i class="fa fa-sign-in-alt"></i></a>
+                </div>
+            <?php } ?>
         </div>
     </nav>
 </header>
@@ -130,5 +146,7 @@ if (isset($_GET["itemId"])) {
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="js/handle-requests.js"></script>
 </body>
 </html>

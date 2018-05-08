@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 
 require 'app/ConfigEnum.php';
 require 'app/DatabaseConfiguration.php';
@@ -17,6 +19,15 @@ $config = new DatabaseConfiguration(
 $connection = new DatabaseConnection($config);
 $wifiSpot = new HandleWifiSpots($connection);
 $items = $wifiSpot->getAllItems();
+
+$isLoggedIn = false;
+$adminUsername = null;
+if (isset($_SESSION)) {
+    if (isset($_SESSION["authenticated"]) && isset($_SESSION["adminUsername"])) {
+        $isLoggedIn = true;
+        $adminUsername = $_SESSION["adminUsername"];
+    }
+}
 
 ?>
 <!doctype html>
@@ -46,10 +57,15 @@ $items = $wifiSpot->getAllItems();
                     <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-
-            <div class="form-inline mt-2 mt-md-0">
-                <a class="nav-link" href="#">Logout</a>
-            </div>
+            <?php if ($isLoggedIn) { ?>
+                <div class="form-inline mt-2 mt-md-0">
+                    <h5 class="text-white pr-2"><?php echo $adminUsername; ?></h5><a class="btn btn-light" id="sign-out"><i class="fa fa-sign-out-alt"></i></a>
+                </div>
+            <?php } else { ?>
+                <div class="form-inline mt-2 mt-md-0">
+                    <h5 class="text-white pr-2">Sign in</h5><a class="btn btn-light" href="login.php"><i class="fa fa-sign-in-alt"></i></a>
+                </div>
+            <?php } ?>
         </div>
     </nav>
 </header>
@@ -76,14 +92,26 @@ $items = $wifiSpot->getAllItems();
                 <td><?php echo $v["WiFiName"]; ?></td>
                 <td><?php echo $v["Address"]; ?></td>
                 <td>
+                    <?php if ($isLoggedIn) { ?>
                     <a href="view.php?itemId=<?php echo $v["idWiFiSpots"]; ?>">
                         <button type="button" class="btn btn-sm btn-info"><i class="fas fa-info-circle"></i></button>
                     </a>
+                    <?php } else { ?>
+                    <a href="#" data-toggle="modal" data-target=".sign-in-required-modal">
+                        <button type="button" class="btn btn-sm btn-info"><i class="fas fa-info-circle"></i></button>
+                    </a>
+                    <?php } ?>
                 </td>
                 <td>
+                    <?php if ($isLoggedIn) { ?>
                     <a href="edit.php?itemId=<?php echo $v["idWiFiSpots"]; ?>">
                         <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-pencil-alt"></i></button>
                     </a>
+                    <?php } else { ?>
+                    <a href="#" data-toggle="modal" data-target=".sign-in-required-modal">
+                        <button type="button" class="btn btn-sm btn-dark"><i class="fas fa-pencil-alt"></i></button>
+                    </a>
+                    <?php } ?>
                 </td>
             </tr>
             <?php } ?>
@@ -91,8 +119,16 @@ $items = $wifiSpot->getAllItems();
         </table>
         <div class="my-3">
             <label class="text-secondary font-weight-bold">With selected:</label>
+            <?php if ($isLoggedIn) { ?>
             <button type="button" id="confirmDeletion" class="btn btn-outline-danger btn-sm">
                 <i class="fas fa-trash-alt mr-1"></i>Delete</button>
+            <?php } else { ?>
+            <a href="#" data-toggle="modal" data-target=".sign-in-required-modal">
+                <button type="button" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-trash-alt mr-1"></i>Delete
+                </button>
+            </a>
+            <?php } ?>
         </div>
     </div>
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -122,6 +158,22 @@ $items = $wifiSpot->getAllItems();
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" id="deletionSuccessClose">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal sign-in-required-modal" tabindex="-1" role="dialog" aria-labelledby="signInRequiredModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Sign in required</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Sign in required to manage entries.</h4>
+                    <a href="login.php">Login</a>
                 </div>
             </div>
         </div>
