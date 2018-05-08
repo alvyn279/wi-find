@@ -4,7 +4,7 @@ require '../ConfigEnum.php';
 require '../DatabaseConfiguration.php';
 require '../DatabaseConnection.php';
 require '../dao/WifiSpotsDao.php';
-require '../HandleWifiSpots.php';
+require '../handlers/HandleWifiSpots.php';
 
 $config = new DatabaseConfiguration(
     ConfigEnum::DB_HOST,

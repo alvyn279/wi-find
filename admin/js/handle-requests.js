@@ -8,6 +8,11 @@ var getIdsFromSelectedItems = function () {
     });
     return id;
 };
+var redirectToIndexPage = function () {
+    var locHref = location.href;
+    var homePageLink = locHref.substring(0, locHref.lastIndexOf('/')) + '/index.php';
+    window.location.replace(homePageLink);
+};
 var actions = {
     delete: function () {
         return {
@@ -30,49 +35,88 @@ var actions = {
             submitBtn: $('input[name="loginSubmitBtn"]').val(),
             errorMsg: $('.error-msg')
         };
+    },
+    logout: function () {
+        return {
+            id: $('#sign-out')
+        }
     }
 };
-var appendResponse = function (response) {
-    actions.deletionSuccess().modalId.modal('show');
-    actions.deletionSuccess().modalId.find(".alert").empty().prepend(response);
-    actions.deletionSuccess().modalCloseBtn.click(function (e) {
-        e.preventDefault();
-        actions.deletionSuccess().modalId.modal('hide');
-        setTimeout(location.reload.bind(location), 500);
-    })
+var DeleteItems = {
+    modalSuccess: function (response) {
+        actions.deletionSuccess().modalId.modal('show');
+        actions.deletionSuccess().modalId.find(".alert").empty().prepend(response);
+        actions.deletionSuccess().modalCloseBtn.click(function (e) {
+            e.preventDefault();
+            actions.deletionSuccess().modalId.modal('hide');
+            setTimeout(location.reload.bind(location), 500);
+        })
+    },
+    request: function (selectedItems) {
+        $.ajax({
+            url: 'app/controllers/manage_deletion.php',
+            type: 'post',
+            data: {items: selectedItems, deletion: true}
+        }).done(function (response) {
+            actions.delete().modalId.modal('hide');
+            DeleteItems.modalSuccess(response);
+        });
+    },
+    main: function () {
+        actions.delete().mainBtn.click(function() {
+            if (getSelectedItems().length === 0) {
+                alert('nothing selected');
+                return false;
+            }
+            actions.delete().modalId.modal("show");
+            actions.delete().modalConfirmBtn.click(function (e) {
+                e.preventDefault();
+                DeleteItems.request(getIdsFromSelectedItems());
+            });
+        });
+    }
 };
-var deleteItems = function () {
-  actions.delete().mainBtn.click(function() {
-      if (getSelectedItems().length === 0) {
-          alert('nothing selected');
-          return false;
-      }
-      actions.delete().modalId.modal("show");
-      actions.delete().modalConfirmBtn.click(function (e) {
-         e.preventDefault();
-         deleteRequestUsingAjax(getIdsFromSelectedItems());
+var Login = {
+  request: function () {
+      var loginData = actions.login().formId.serialize();
+      $.ajax({
+          url: 'app/controllers/manage_login.php',
+          type: 'post',
+          data: loginData
+      }).done(function (response) {
+          if (response === '1') {
+              redirectToIndexPage();
+          } else {
+              actions.login().errorMsg.empty().prepend(response);
+          }
       });
-  });
+  },
+  main: function () {
+      actions.login().formId.submit(function (e) {
+          Login.request();
+          e.preventDefault();
+          return false;
+      });
+  }
 };
-var deleteRequestUsingAjax = function (selectedItems) {
-    $.ajax({
-        url: 'app/controllers/manage_deletion.php',
-        type: 'post',
-        data: {items: selectedItems, deletion: true}
-    }).done(function (response) {
-        actions.delete().modalId.modal('hide');
-        appendResponse(response);
-    });
-};
-var loginSubmit = function () {
-    var loginData = actions.login().formId.serialize();
-    $.ajax({
-        url: 'app/controllers/manage_login.php',
-        type: 'post',
-        data: loginData
-    }).done(function (response) {
-        actions.login().errorMsg.empty().prepend(response);
-    });
+var SignOut = {
+  request: function () {
+      $.ajax({
+          url: 'app/controllers/manage_logout.php',
+          type: 'get'
+      }).done(function (response) {
+          if (response === '1') {
+              redirectToIndexPage();
+          }
+      });
+  },
+  main: function () {
+      actions.logout().id.click(function (e) {
+          SignOut.request();
+          e.preventDefault();
+          return false;
+      });
+  }
 };
 $(document).ready(function () {
     $('#entryTable').DataTable({
@@ -82,10 +126,7 @@ $(document).ready(function () {
         },
         'pageLength': 6
     });
-    deleteItems();
-    actions.login().formId.submit(function (e) {
-        loginSubmit();
-        e.preventDefault();
-        return false;
-    });
+    DeleteItems.main();
+    Login.main();
+    SignOut.main();
 });

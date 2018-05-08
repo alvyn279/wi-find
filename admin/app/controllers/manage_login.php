@@ -36,9 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($_POST["password"] != $passwordInDb) {
                 echo "Password not match!";
             } else {
-                echo "Matched!";
-                // TODO set the session variables here
-                // and redirect to index
+                $_SESSION["authenticated"] = 1;
+                $_SESSION["adminUsername"] = $_POST["username"];
+                echo $_SESSION["authenticated"];
             }
         } else {
             echo "This user does not exists.";
