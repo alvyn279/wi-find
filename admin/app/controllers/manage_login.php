@@ -11,10 +11,10 @@ require '../handlers/HandleAdmin.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = null;
-    if (!filter_var($_POST["loginEmail"], FILTER_VALIDATE_EMAIL)) {
-        $errors .= "Please enter a valid email. <br>";
+    if (empty($_POST["username"])) {
+        $errors .= "Please enter the username. <br>";
     }
-    if (empty($_POST["loginPassword"])) {
+    if (empty($_POST["password"])) {
         $errors .= "Password cannot be empty.";
     }
     if (!empty($errors)) {
@@ -30,14 +30,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connection = new DatabaseConnection($config);
         $h = new HandleAdmin($connection);
 
-        $username = $h->getAdminUsernameByEmail($_POST["loginEmail"]);
-        $passwordInDb = $h->getPasswordByUsername($username);
-        if ($_POST["loginPassword"] != $passwordInDb) {
-            echo "Password not match!";
+        $username = $_POST["username"];
+        if ($h->isAdminUserExists($username)) {
+            $passwordInDb = $h->getPasswordByUsername($username);
+            if ($_POST["password"] != $passwordInDb) {
+                echo "Password not match!";
+            } else {
+                echo "Matched!";
+                // TODO set the session variables here
+                // and redirect to index
+            }
         } else {
-            echo "Matched!";
-            // TODO set the session variables here
-            // and redirect to index
+            echo "This user does not exists.";
         }
     }
 }

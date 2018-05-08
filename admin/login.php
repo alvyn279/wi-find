@@ -46,9 +46,9 @@ session_start();
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                                 </div>
-                                <input class="form-control" placeholder="Email"
-                                       id="loginEmail"
-                                       name="loginEmail"
+                                <input class="form-control" placeholder="Username"
+                                       id="username"
+                                       name="username"
                                        type="text">
                             </div>
                         </div>
@@ -57,10 +57,7 @@ session_start();
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                                 </div>
-                                <input class="form-control" placeholder="password"
-                                       id="loginPassword"
-                                       name="loginPassword"
-                                       type="password">
+                                <input class="form-control" id="password" name="password" type="password">
                             </div>
                         </div>
                         <div class="form-group">

@@ -49,10 +49,4 @@ class HandleAdmin extends AdminDao
     {
         return $this->getAdminByUsername($username)["password"];
     }
-
-    public function getAdminUsernameByEmail($email)
-    {
-        $positionOfAt = strpos($email, "@");
-        return substr($email, 0, $positionOfAt);
-    }
 }
