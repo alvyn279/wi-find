@@ -22,4 +22,54 @@ require 'app/DatabaseConnection.php';
 require 'app/models/WifiSpots.php';
 require 'app/dao/WifiSpotsDao.php';
 require 'app/handlers/HandleWifiSpots.php';
+```
+### Classes and folders in `admin/app/` 
+- `ConfigEnum.php` contains constant variables necessary for connecting to a MySQL database
+- `DatabaseConfiguration.php` has a constructor that requires `ConfigEnum` constants
+```
+        $config = new DatabaseConfiguration(
+            ConfigEnum::DB_HOST,
+            ConfigEnum::DB_PORT,
+            ConfigEnum::DB_NAME,
+            ConfigEnum::DB_USER,
+            ConfigEnum::DB_PASSWORD
+        );
 ```  
+- `DatabaseConnection.php` is a singleton that accepts `DatabaseConfiguration` object as a parameter to connect to a MySQL database
+```
+$connection = new DatabaseConnection($config);
+$instance = $connection->getInstance();
+```
+- `admin/app/controllers` often used to handle AJAX request coming from the application or views
+```
+// see url
+var DeleteItems = {
+    modalSuccess: function (response) { ... },
+    request: function (selectedItems) {
+        $.ajax({
+            url: 'app/controllers/manage_deletion.php',
+            type: 'post',
+            data: {items: selectedItems, deletion: true}
+        }).done(function (response) {
+            actions.delete().modalId.modal('hide');
+            DeleteItems.modalSuccess(response);
+        });
+    },
+    main: function () { ... }
+};
+```
+- `admin/app/models` are model objects often used as a parameter in `dao` methods, can be associated with creating, and editing a record in a database table
+- `admin/app/handlers` classes act as an intermediary between `dao` classes and the application (view)
+```
+// each handlers class extends its corresponding dao classes
+class AdminDao { ... }
+class HandleAdmin extends AdminDao { ... }
+// example usage
+$connection = new DatabaseConnection($config);
+$hws= new HandleWifiSpots($connection);
+$hws->getItemById($itemId);
+```
+- `admin/app/dao` classes 
+  - act as an intermediary between `handlers` classes and the database
+  - often used to access data, delete, and edit data from the storage, 
+ 
