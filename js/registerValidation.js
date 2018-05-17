@@ -1,3 +1,11 @@
+var util = {
+    isValidEmail: function (email) {
+        return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))
+    },
+    isEmpty: function (field) {
+        return field.length === 0 || field === "";
+    }
+};
 function errorMessages() {
     return {
         name: "Please enter your full name.",
@@ -28,7 +36,7 @@ function check() {
         var strengthIndex = fields.length - 1;
         var strengthSelectedIndex = fields[strengthIndex].selector.selectedIndex;
         if (i === 1) { // special case for email
-            if (!Util.isValidEmail(fields[i].selector.value)) {
+            if (!util.isValidEmail(fields[i].selector.value)) {
                 alerts += fields[i].errorMsg + "\n";
                 fields[i].selector.style.backgroundColor = inputBGColor.red;
             } else {
@@ -37,7 +45,7 @@ function check() {
         } else if (strengthSelectedIndex === 0 && i === strengthIndex) { // special case for strength
             alerts += fields[i].errorMsg + "\n";
             fields[i].selector.style.backgroundColor = inputBGColor.red;
-        } else if (Util.isEmpty(fields[i].selector.value)) {
+        } else if (util.isEmpty(fields[i].selector.value)) {
             alerts += fields[i].errorMsg + "\n";
             fields[i].selector.style.backgroundColor = inputBGColor.red;
         } else {

@@ -57,7 +57,7 @@ var coordinateComponents = {
 };
 
 function getCoordinates() {
-    if (Util.isEmpty(document.getElementById("address").value)) {
+    if ((document.getElementById("address").value) === "") {
         alert("Enter a valid address.")
     }
     var formattedAddressVal = coordinateComponents.formattedAddress.value;
